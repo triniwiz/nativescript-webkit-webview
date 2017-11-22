@@ -40,7 +40,7 @@ class WKNavigationDelegateImpl extends NSObject
 
     webViewDecidePolicyForNavigationActionDecisionHandler(webView: WKWebView, navigationAction: WKNavigationAction, decisionHandler: any): void {
         const owner = this._owner.get();
-        if (owner && webView.URL) {
+        if (owner && navigationAction.request.URL) {
             let navType: NavigationType = "other";
 
             switch (navigationAction.navigationType) {
@@ -61,7 +61,7 @@ class WKNavigationDelegateImpl extends NSObject
                     break;
             }
             decisionHandler(WKNavigationActionPolicy.Allow);
-            owner._onLoadStarted(webView.URL.absoluteString, navType);
+            owner._onLoadStarted(navigationAction.request.URL.absoluteString, navType);
         }
     }
 

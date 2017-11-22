@@ -1,6 +1,6 @@
 {
     "name": "nativescript-webkit-webview",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Webkit Webview for Nativescript",
     "main": "webkit-webview",
     "typings": "index.d.ts",
