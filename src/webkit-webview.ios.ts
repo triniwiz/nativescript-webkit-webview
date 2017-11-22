@@ -65,11 +65,6 @@ class WKNavigationDelegateImpl extends NSObject
         }
     }
 
-
-    webViewDidStartProvisionalNavigation(webView: WKWebView, navigation: WKNavigation): void {
-        const owner = this._owner.get();
-
-    }
 }
 
 class WKScriptMessageHandlerImpl extends NSObject
@@ -116,7 +111,7 @@ export class TNSWKWebView extends View {
     private _messageHandlers: Array<string> = [];
     private _scriptMessageHandler: WKScriptMessageHandlerImpl;
     private _userContentController: WKUserContentController;
-
+    private _delegate: WKNavigationDelegateImpl;
     constructor() {
         super();
         this._scriptMessageHandler = WKScriptMessageHandlerImpl.initWithOwner(
@@ -124,12 +119,11 @@ export class TNSWKWebView extends View {
         );
         this._userContentController = WKUserContentController.new();
         const config = WKWebViewConfiguration.new();
-        config.userContentController = this._userContentController;
         this.nativeView = this._ios = new WKWebView({
             frame: CGRectZero,
             configuration: config
         });
-        this._ios.navigationDelegate = WKNavigationDelegateImpl.initWithOwner(
+        this._delegate = WKNavigationDelegateImpl.initWithOwner(
             new WeakRef(this)
         );
         this._ios.configuration.preferences.setValueForKey(
@@ -162,7 +156,6 @@ export class TNSWKWebView extends View {
         this.notify(args);
     }
 
-
     public stopLoading() {
         this._ios.stopLoading();
     }
@@ -187,6 +180,12 @@ export class TNSWKWebView extends View {
         } else {
             this._loadData(src);
         }
+    }
+
+    onLoaded(): void {
+        super.onLoaded();
+        this._ios.configuration.userContentController = this._userContentController;
+        this._ios.navigationDelegate = this._delegate;
     }
 
     onUnloaded(): void {
