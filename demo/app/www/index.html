@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>WebKit WebView</title>
+    <style>
+        body {
+            background-color: #00aafc;
+            font-family: monospace;
+            font-size: 48px;
+            text-align: center;
+            color: white;
+        }
+    </style>
+    <script>
+        var body, keys, ports;
+
+        function initiate() {
+            body = document.getElementsByTagName('body')[0];
+            keys = [];
+            ports = {};
+        }
+
+        function sendMessage() {
+            try {
+                if (window.webkit && window.webkit.messageHandlers) { //IOS
+                    window.webkit.messageHandlers.webkitMessenger.postMessage('Some message');
+                } else {
+                    if (ports['webkitMessenger']) {
+                        ports['webkitMessenger'].postMessage('Some message');
+                    }
+                }
+                keys.push('(╯°□°）╯︵ ┻━┻');
+            } catch (err) {
+                keys.push('Error: ' + err.toString());
+            }
+
+            setTimeout(function () {
+                body.style.color = 'black';
+                body.style.backgroundColor = 'white';
+                body.innerText = keys.join('\n');
+            }, 500);
+
+        }
+
+        onmessage = function (e) {
+            if (e.ports && e.ports.length > 0) {
+                ports[e.data] = e.ports[0];
+            }
+        }
+    </script>
+</head>
+
+<body onload="initiate();">
+    <p>Webkit WebViewloaded!</p>
+</body>
+
+</html>

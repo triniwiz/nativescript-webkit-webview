@@ -1,0 +1,9 @@
+<Page title="WebKit WebView" 
+  xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page" 
+  xmlns:ui="nativescript-webkit-webview">
+  <StackLayout class="p-20">
+    <Button class="btn btn-primary" row="0" text="Reload" tap="reload"></Button>
+      <ui:TNSWKWebView style="border-width: 1; margin: 16;" id="webView" src="~/www/index.html"/>
+      <ui:TNSWKWebView style="border-width: 1; margin: 16;" src="https://www.google.com"/>
+  </StackLayout>
+</Page>
