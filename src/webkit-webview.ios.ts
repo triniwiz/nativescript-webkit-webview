@@ -194,7 +194,12 @@ export class TNSWKWebView extends View {
 
   [srcProperty.setNative](src: string) {
     this.stopLoading();
-    if (src.startsWith('~/') || src.startsWith('http') || src.startsWith('/')) {
+    if (
+      src.startsWith('~/') ||
+      src.startsWith('http') ||
+      src.startsWith('/') ||
+      src.startsWith('file:///')
+    ) {
       this._loadUrl(src);
     } else {
       this._loadData(src);
@@ -252,7 +257,13 @@ export class TNSWKWebView extends View {
       const myRequest = NSURLRequest.requestWithURL(myUrl);
       this._ios.loadRequest(myRequest);
     } else if (url.startsWith('/')) {
-      const myUrl = NSURL.fileURLWithPath(url);
+      const myUrl = NSURL.URLWithString(encodeURI('file://' + url));
+      const myReadAccessUrl = readAccessUrl
+        ? NSURL.fileURLWithPath(readAccessUrl)
+        : myUrl;
+      this._ios.loadFileURLAllowingReadAccessToURL(myUrl, myReadAccessUrl);
+    } else if (url.startsWith('file:///')) {
+      const myUrl = NSURL.URLWithString(encodeURI('file://' + url));
       const myReadAccessUrl = readAccessUrl
         ? NSURL.fileURLWithPath(readAccessUrl)
         : myUrl;
@@ -265,7 +276,7 @@ export class TNSWKWebView extends View {
           url.replace(reTilda, '')
         );
       }
-      const myUrl = NSURL.fileURLWithPath(url);
+      const myUrl = NSURL.URLWithString(encodeURI('file://' + url));
       const myReadAccessUrl = readAccessUrl
         ? NSURL.fileURLWithPath(readAccessUrl)
         : myUrl;
