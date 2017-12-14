@@ -1,5 +1,5 @@
-<Page title="WebKit WebView" 
-  xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page" 
+<Page title="WebKit WebView"
+  xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page"
   xmlns:ui="nativescript-webkit-webview">
   <StackLayout class="p-20">
     <Button class="btn btn-primary" row="0" text="Reload" tap="reload"></Button>
