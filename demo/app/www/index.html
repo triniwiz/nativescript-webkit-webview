@@ -48,11 +48,16 @@
                 ports[e.data] = e.ports[0];
             }
         }
+
+        openWindow = function() {
+            window.open('http://www.google.com');
+        }
     </script>
 </head>
 
 <body onload="initiate();">
     <p>Webkit WebViewloaded!</p>
+    <button onclick="openWindow()">CLICK ME</button>
 </body>
 
 </html>

@@ -16,7 +16,11 @@ export function pageLoaded(args: observable.EventData) {
         console.log('finished');
         console.log(args.url);
     });
-    // webView.src = 'https://www.google.com';
+
+    webView.on('open', data => {
+        console.log(data.eventName);
+        console.log(JSON.stringify(data.object.body));
+    });
 }
 
 
