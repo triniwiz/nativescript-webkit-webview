@@ -357,11 +357,12 @@ export class TNSWKWebView extends View {
         : myUrl;
       this._ios.loadFileURLAllowingReadAccessToURL(myUrl, myReadAccessUrl);
     } else if (url.startsWith('file:///')) {
+      let directory = url;
       if (url.indexOf('/') !== -1) {
-        url = url.substring(0, url.lastIndexOf('/'));
+        directory = url.substring(0, url.lastIndexOf('/'));
       }
       const myUrl = NSURL.URLWithString(encodeURI(url));
-      const myReadAccessUrl = NSURL.fileURLWithPath(url);
+      const myReadAccessUrl = NSURL.fileURLWithPath(directory);
       this._ios.loadFileURLAllowingReadAccessToURL(myUrl, myReadAccessUrl);
     } else {
       const reTilda = new RegExp('^~/');
