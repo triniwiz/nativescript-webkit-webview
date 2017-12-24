@@ -212,6 +212,7 @@ export class TNSWKWebView extends View {
   public static openEvent = 'open';
 
   public src: string;
+  public readAccessUrl: string;
   private _ios: WKWebView;
   private _messageHandlers: Array<string> = [];
   private _scriptMessageHandler: WKScriptMessageHandlerImpl;
@@ -292,7 +293,7 @@ export class TNSWKWebView extends View {
       src.startsWith('/') ||
       src.startsWith('file:///')
     ) {
-      this._loadUrl(src);
+      this._loadUrl(src, this.readAccessUrl);
     } else {
       this._loadData(src);
     }
@@ -357,10 +358,8 @@ export class TNSWKWebView extends View {
         : myUrl;
       this._ios.loadFileURLAllowingReadAccessToURL(myUrl, myReadAccessUrl);
     } else if (url.startsWith('file:///')) {
-      const myUrl = NSURL.URLWithString(encodeURI('file://' + url));
-      const myReadAccessUrl = readAccessUrl
-        ? NSURL.fileURLWithPath(readAccessUrl)
-        : myUrl;
+      const myUrl = NSURL.URLWithString(encodeURI(url));
+      const myReadAccessUrl = NSURL.fileURLWithPath(this.readAccessUrl || url);
       this._ios.loadFileURLAllowingReadAccessToURL(myUrl, myReadAccessUrl);
     } else {
       const reTilda = new RegExp('^~/');
