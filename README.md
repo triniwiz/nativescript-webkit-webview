@@ -25,6 +25,8 @@ registerElement('WebView', () => require('nativescript-webkit-webview').TNSWKWeb
 <WebView src="https://www.google.com"></WebView>
 ```
 
+### Core
+
 IMPORTANT: Make sure you include xmlns:wk="nativescript-webkit-webview" on the Page tag
 
 ```xml
