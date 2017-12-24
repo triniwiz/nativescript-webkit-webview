@@ -11,13 +11,24 @@
 tns plugin add nativescript-webkit-webview
 ```
 
-## Usage 
+## Usage
+ 
 
+### Angular
+
+```ts
+import { registerElement } from 'nativescript-angular/element-registry';
+registerElement('WebView', () => require('nativescript-webkit-webview').TNSWKWebView);
+```
+
+```html
+<WebView src="https://www.google.com"></WebView>
+```
 
 IMPORTANT: Make sure you include xmlns:wk="nativescript-webkit-webview" on the Page tag
 
 ```xml
-<ui:TNSWKWebView src="https://www.google.com"/>
+<wk:TNSWKWebView src="https://www.google.com"/>
 ```
     
 ## License
