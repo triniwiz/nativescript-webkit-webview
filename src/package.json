@@ -1,6 +1,6 @@
 {
     "name": "nativescript-webkit-webview",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Webkit Webview for Nativescript",
     "main": "webkit-webview",
     "typings": "index.d.ts",
@@ -13,7 +13,6 @@
     "scripts": {
         "tsc": "tsc -skipLibCheck",
         "build": "npm i && tsc",
-        "postclone": "npm i && node scripts/postclone.js && cd ../demo && npm i && cd ../src && npm run plugin.link",
         "test.android": "npm i && npm run tsc && npm run tslint && cd ../demo && tns build android && tns test android --justlaunch",
         "test.ios": "npm i && npm run tsc && npm run tslint && cd ../demo && tns build ios && tns test ios --justlaunch",
         "tslint": "cd .. && tslint \"**/*.ts\" --config tslint.json --exclude \"**/node_modules/**\"",
@@ -36,6 +35,13 @@
         "name": "Osei",
         "email": "fortune.osei@yahoo.com"
     },
+    "contributors": [
+        {
+            "name": "Sean Perkins",
+            "email": "sean@devonite.com",
+            "url": "https://github.com/sean-perkins"
+        }
+    ],
     "bugs": {
         "url": "https://github.com/triniwiz/nativescript-webkit-webview/issues"
     },

@@ -226,7 +226,7 @@ export class TNSWKWebView extends View {
       "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'initial-scale=1.0'); document.getElementsByTagName('head')[0].appendChild(meta);";
     const wkUScript = WKUserScript.alloc().initWithSourceInjectionTimeForMainFrameOnly(
       jScript,
-      WKUserScriptInjectionTime.AtDocumentEnd,
+      WKUserScriptInjectionTime.AtDocumentStart,
       true
     );
     this._scriptMessageHandler = WKScriptMessageHandlerImpl.initWithOwner(
